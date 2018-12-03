@@ -81,7 +81,10 @@ class Sender():
 
 def run():
     sender = Sender()
-    sender.adsl()
+    try:
+        sender.adsl().send(None)
+    except StopIteration:
+        print('A adys try cycle has been ran.')
 
 
 if __name__ == '__main__':
