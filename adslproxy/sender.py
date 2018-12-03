@@ -2,6 +2,7 @@
 import re
 import time
 import requests
+import asyncio
 from requests.exceptions import ConnectionError, ReadTimeout
 from adslproxy.db import RedisClient
 from adslproxy.config import *
@@ -46,7 +47,7 @@ class Sender():
         if self.redis.set(CLIENT_NAME, proxy):
             print('Successfully Set Proxy', proxy)
 
-    def adsl(self):
+    async def adsl(self):
         """
         拨号主进程
         :return: None
@@ -57,19 +58,20 @@ class Sender():
             (status, output) = sureprocess.getstatusoutput(ADSL_BASH)
             if status == 0:
                 print('ADSL Successfully')
-                ip = getoutip()
-                if ip:
-                    print('Now IP', ip)
-                    print('Testing Proxy, Please Wait')
-                    proxy = '{ip}:{port}'.format(ip=ip, port=PROXY_PORT)
-                    if self.test_proxy(proxy):
-                        print('Valid Proxy')
-                        self.set_proxy(proxy)
-                        print('Sleeping')
-                        time.sleep(ADSL_CYCLE)
-                    else:
-                        print('Invalid Proxy')
-                else:
+                try:
+                    ip = await getoutip()
+                    if ip:
+                        print('Now IP', ip)
+                        print('Testing Proxy, Please Wait')
+                        proxy = '{ip}:{port}'.format(ip=ip, port=PROXY_PORT)
+                        if self.test_proxy(proxy):
+                            print('Valid Proxy')
+                            self.set_proxy(proxy)
+                            print('Sleeping')
+                            time.sleep(ADSL_CYCLE)
+                        else:
+                            print('Invalid Proxy')
+                except StopIteration:
                     print('Get IP Failed, Re Dialing')
                     time.sleep(ADSL_ERROR_CYCLE)
             else:

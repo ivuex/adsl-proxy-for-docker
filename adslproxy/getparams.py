@@ -8,7 +8,7 @@ import random
 from requests.exceptions import ConnectionError, ReadTimeout
 
 
-def getoutip():
+async def getoutip():
     try:
         # 获取外网ip
         res = requests.get('http://httpbin.org/get')
