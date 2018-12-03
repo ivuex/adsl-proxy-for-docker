@@ -59,6 +59,7 @@ class Sender():
             if status == 0:
                 print('ADSL Successfully')
                 try:
+                    time.sleep(4)
                     ip = await getoutip()
                     print(ip)
                     if ip:
