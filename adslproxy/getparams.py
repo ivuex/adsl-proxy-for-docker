@@ -32,7 +32,7 @@ def getmac():
         chars = list(range(0,9)) + ['a', 'b', 'c', 'd', 'e', 'f']
         for i in list(range(0,6)):
             for j in list(range(0,4)):
-                macip += random.choice(chars)
+                macip += random.choice(str(chars))
             if(i < 5):
                 macip += ':'
     return macip
