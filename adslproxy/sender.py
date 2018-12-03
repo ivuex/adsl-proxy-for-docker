@@ -62,7 +62,7 @@ class Sender():
                     print('sleep 6s...')
                     time.sleep(6)
                     ip = await getoutip()
-                    print('got ip in adls method.')
+                    print('in adls method, ip has been got: ' + ip)
                     if ip:
                         print('Now IP', ip)
                         print('Testing Proxy, Please Wait')
