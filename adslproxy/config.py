@@ -6,7 +6,7 @@ ADSL_CYCLE = 100
 ADSL_ERROR_CYCLE = 5
 
 # ADSL命令
-ADSL_BASH = 'adsl-stop; print "sleep 2s..."; sleep 2; adsl-start; sleep 4s;'
+ADSL_BASH = 'adsl-stop; print "sleep 1s..."; sleep 1; adsl-start'
 # ADSL_BASH = 'echo local test, no adsl env'
 
 # 代理运行端口
