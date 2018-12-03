@@ -5,12 +5,17 @@ import requests
 from adslproxy.sureprocess import sureprocess
 import json
 import random
+from requests.exceptions import ConnectionError, ReadTimeout
+
 
 def getoutip():
-    # 获取外网ip
-    res = requests.get('http://httpbin.org/get')
-    ip = json.loads(res.text).get('origin')
-    return ip
+    try:
+        # 获取外网ip
+        res = requests.get('http://httpbin.org/get')
+        ip = json.loads(res.text).get('origin')
+        return ip
+    except(ConnectionError, ReadTimeout):
+        return False
 
 
 def getmac():

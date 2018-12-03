@@ -22,7 +22,7 @@ ADSL_IFNAME = 'ppp0'
 REDIS_HOST = 'localhost'
 
 # Redis数据库密码, 如无则填None
-REDIS_PASSWORD = 'nice666'
+REDIS_PASSWORD = None
 
 # Redis数据库端口
 REDIS_PORT = 6379
@@ -31,7 +31,7 @@ REDIS_PORT = 6379
 PROXY_KEY = 'adsl'
 
 # 测试URL
-TEST_URL = 'http://www.baidu.com'
+TEST_URL = 'http://httpbin.org/get'
 
 # 测试超时时间
 TEST_TIMEOUT = 20

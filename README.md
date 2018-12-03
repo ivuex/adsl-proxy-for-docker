@@ -89,7 +89,7 @@ pip3 install redis tornado requests
 ### 5.Clone项目
 
 ```
-git clone https://github.com/Germey/ADSLProxy.git
+git clone https://github.com/ivuex/adsl-proxy-for-docker.git
 ```
 
 ### 6.Redis
