@@ -30,6 +30,7 @@ class Sender():
         :return: 测试结果
         """
         response = await self.get_test_url_response(proxy)
+        print('33')
         if response:
             return 200 == response.status_code
         else:
@@ -81,23 +82,25 @@ class Sender():
                     ip = await getoutip()
                     print('in adls method, ip has been got: ' + ip)
                     if ip:
-                        print('Now IP', ip)
-                        print('Testing Proxy, Please Wait')
                         proxy = '{ip}:{port}'.format(ip=ip, port=PROXY_PORT)
-                        if await self.test_proxy(proxy):
+                        # proxy = '183.230.145.112:8888'
+                        proxy = '61.189.242.243:55484'
+                        print('Now proxy, ' + proxy + ', testing Proxy, Please Wait')
+                        ifvalid = await self.test_proxy(proxy)
+                        if ifvalid:
                             print('Valid Proxy')
                             self.set_proxy(proxy)
-                            print('Sleeping... ' + ADSL_CYCLE)
+                            print('Sleeping... ' + str(ADSL_CYCLE))
                             time.sleep(ADSL_CYCLE)
                         else:
                             print('Invalid Proxy')
                 except StopIteration:
                     print('Get IP Failed, Re Dialing')
-                    print('Sleeping... ' + ADSL_CYCLE)
+                    print('Sleeping... ' + str(ADSL_CYCLE))
                     time.sleep(ADSL_ERROR_CYCLE)
             else:
                 print('ADSL Failed, Please Check')
-                print('Sleeping... ' + ADSL_CYCLE)
+                print('Sleeping... ' + str(ADSL_CYCLE))
                 time.sleep(ADSL_ERROR_CYCLE)
 
 
