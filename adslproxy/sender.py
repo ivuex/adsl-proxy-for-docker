@@ -60,6 +60,7 @@ class Sender():
                 print('ADSL Successfully')
                 try:
                     ip = await getoutip()
+                    print(ip)
                     if ip:
                         print('Now IP', ip)
                         print('Testing Proxy, Please Wait')
