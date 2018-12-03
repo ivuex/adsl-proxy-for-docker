@@ -13,6 +13,7 @@ async def getoutip():
         # 获取外网ip
         res = requests.get('http://httpbin.org/get')
         ip = json.loads(res.text).get('origin')
+        print('Now the ouput ip is ' + ip)
         return ip
     except(ConnectionError, ReadTimeout):
         return False
