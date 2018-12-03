@@ -12,7 +12,7 @@ from adslproxy.getparams import getmac, getoutip
 
 class Sender():
 
-    def test_proxy(self, proxy):
+    async def test_proxy(self, proxy):
         """
         测试代理
         :param proxy: 代理
@@ -67,7 +67,7 @@ class Sender():
                         print('Now IP', ip)
                         print('Testing Proxy, Please Wait')
                         proxy = '{ip}:{port}'.format(ip=ip, port=PROXY_PORT)
-                        if self.test_proxy(proxy):
+                        if await self.test_proxy(proxy):
                             print('Valid Proxy')
                             self.set_proxy(proxy)
                             print('Sleeping... ' + ADSL_CYCLE)
