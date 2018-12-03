@@ -59,9 +59,10 @@ class Sender():
             if status == 0:
                 print('ADSL Successfully')
                 try:
-                    time.sleep(4)
+                    print('sleep 6s...')
+                    time.sleep(6)
                     ip = await getoutip()
-                    print(ip)
+                    print('got ip in adls method.')
                     if ip:
                         print('Now IP', ip)
                         print('Testing Proxy, Please Wait')
@@ -69,15 +70,17 @@ class Sender():
                         if self.test_proxy(proxy):
                             print('Valid Proxy')
                             self.set_proxy(proxy)
-                            print('Sleeping')
+                            print('Sleeping... ' + ADSL_CYCLE)
                             time.sleep(ADSL_CYCLE)
                         else:
                             print('Invalid Proxy')
                 except StopIteration:
                     print('Get IP Failed, Re Dialing')
+                    print('Sleeping... ' + ADSL_CYCLE)
                     time.sleep(ADSL_ERROR_CYCLE)
             else:
                 print('ADSL Failed, Please Check')
+                print('Sleeping... ' + ADSL_CYCLE)
                 time.sleep(ADSL_ERROR_CYCLE)
 
 
