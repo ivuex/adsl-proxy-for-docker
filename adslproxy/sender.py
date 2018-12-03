@@ -12,21 +12,38 @@ from adslproxy.getparams import getmac, getoutip
 
 class Sender():
 
+    async def get_test_url_response(self, proxy):
+        try:
+            print(TEST_URL, TEST_TIMEOUT, 'output config, debugging. 22----')
+            response = requests.get(TEST_URL, proxies={
+                'http': 'http://' + proxy,
+                'https': 'https://' + proxy
+            }, timeout=TEST_TIMEOUT)
+            return response
+        except (ConnectionError, ReadTimeout):
+            return False
+
     async def test_proxy(self, proxy):
         """
         测试代理
         :param proxy: 代理
         :return: 测试结果
         """
-        try:
-            response = requests.get(TEST_URL, proxies={
-                'http': 'http://' + proxy,
-                'https': 'https://' + proxy
-            }, timeout=TEST_TIMEOUT)
-            if response.status_code == 200:
-                return True
-        except (ConnectionError, ReadTimeout):
+        response = await self.get_test_url_response(proxy)
+        if response:
+            return 200 == response.status_code
+        else:
             return False
+        # try:
+        #     print(TEST_URL, TEST_TIMEOUT, 'output config, debugging. 22----')
+        #     response = requests.get(TEST_URL, proxies={
+        #         'http': 'http://' + proxy,
+        #         'https': 'https://' + proxy
+        #     }, timeout=TEST_TIMEOUT)
+        #     if response.status_code == 200:
+        #         return True
+        # except (ConnectionError, ReadTimeout):
+        #     return False
 
     def remove_proxy(self):
         """
