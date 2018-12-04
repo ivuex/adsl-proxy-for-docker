@@ -20,7 +20,8 @@ CLIENT_NAME = getmac()
 ADSL_IFNAME = 'ppp0'
 
 # Redis数据库IP
-REDIS_HOST = 'localhost'
+# REDIS_HOST = 'localhost'
+REDIS_HOST = '45.249.94.149'
 
 # Redis数据库密码, 如无则填None
 REDIS_PASSWORD = None
